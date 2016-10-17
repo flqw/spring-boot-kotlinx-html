@@ -1,7 +1,7 @@
 package de.flqw.templates.index
 
-import de.flqw.templates.BootstrapClass.*
 import de.flqw.controllers.Message
+import de.flqw.templates.BootstrapClass.*
 import de.flqw.templates.url
 import de.flqw.templates.wrapper
 import kotlinx.html.*
@@ -9,10 +9,6 @@ import kotlinx.html.*
 
 fun render(title: String, messages: List<Message>) = wrapper(title) {
     div(classes = "$col_xs_12") {
-        h1 {
-            +title
-        }
-
         if (messages.isNotEmpty()) {
             h2 {
                 +"Items"
@@ -57,17 +53,18 @@ fun FlowContent.addForm() {
 
 fun FlowContent.messageList(messages: List<Message>) {
     ul(classes = "$list_group") {
-        messages.map{ messageItem(it) }
+        messages.map { messageItem(it) }
     }
 }
 
-
+var lastId = 0
 fun UL.messageItem(message: Message) {
     li(classes = "$list_group_item") {
+        a { id = "item-${message.id}" }
         form {
             style = "margin:0"
             method = FormMethod.post
-            action = url("/delete")
+            action = url("/delete?jumpTo=$lastId")
             input {
                 type = InputType.hidden
                 name = "id"
@@ -83,5 +80,6 @@ fun UL.messageItem(message: Message) {
                 }
             }
         }
+        lastId = message.id
     }
 }

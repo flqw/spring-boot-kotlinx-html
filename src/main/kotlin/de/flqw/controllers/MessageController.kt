@@ -38,15 +38,16 @@ class TestController {
     @PostMapping("/")
     fun post(@RequestParam message: String): String {
         if (!message.isBlank()) {
-            messages.add(Message(nextId++, message))
+            nextId += 1
+            messages.add(Message(nextId, message))
         }
-        return "redirect:/"
+        return "redirect:/#item-$nextId"
     }
 
     @PostMapping("/delete")
-    fun delete(@RequestParam id: Int): String {
+    fun delete(@RequestParam id: Int, @RequestParam jumpTo: Int): String {
         messages.removeAll { it.id == id }
-        return "redirect:/"
+        return "redirect:/#item-$jumpTo"
     }
 
 }
