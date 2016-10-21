@@ -4,14 +4,7 @@ import de.flqw.templates.BootstrapClass.*
 import kotlinx.html.*
 import org.springframework.util.AntPathMatcher
 
-class Menu(
-        val items: MutableList<MenuItem> = mutableListOf(),
-        block: Menu.() -> Unit
-) {
-    init {
-        block(this)
-    }
-}
+class Menu(val items: MutableList<MenuItem> = mutableListOf())
 
 fun Menu.link(title: String, link: String) {
     items.add(Link(title, link))
@@ -50,7 +43,7 @@ class DropDown(
         val items: MutableList<SubMenuitem> = mutableListOf()
 ) : MenuItem
 
-fun FlowContent.navbar(menu: Menu) {
+fun FlowContent.navbar(menu: Menu.() -> Unit) {
     nav(classes = "$navbar $navbar_default $navbar_static_top") {
         div(classes = "$container_fluid") {
             div(classes = "$navbar_header") {
@@ -74,9 +67,9 @@ fun FlowContent.navbar(menu: Menu) {
             div(classes = "$navbar_collapse $collapse") {
                 id = "navbar"
                 ul(classes = "$nav $navbar_nav") {
-                    menu.items.map {
-                        menuItem(it)
-                    }
+                    val m = Menu()
+                    menu.invoke(m)
+                    m.items.forEach { menuItem(it) }
                 }
             }
         }

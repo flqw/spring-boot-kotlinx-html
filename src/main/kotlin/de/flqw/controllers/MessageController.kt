@@ -31,9 +31,7 @@ class TestController {
 
     @ResponseBody
     @GetMapping("/")
-    fun get(): String {
-        return render("Todo", messages)
-    }
+    fun get(): String = render("Todo", messages)
 
     @PostMapping("/")
     fun post(@RequestParam message: String): String {

@@ -11,18 +11,6 @@ import java.text.DecimalFormat
 import javax.servlet.http.HttpServletRequest
 import kotlin.system.measureNanoTime
 
-val menu = Menu {
-    link("Home", "/")
-    link("About", "/about")
-    separator()
-    dropDown("Dropdown") {
-        link("Test 1", "/test1")
-        link("Test 2", "/test2")
-        separator()
-        link("Test 3", "/test3")
-    }
-}
-
 fun wrapper(pageTitle: String, block: DIV.() -> Unit) = StringWriter().appendHTML().html {
     head {
         title {
@@ -35,7 +23,17 @@ fun wrapper(pageTitle: String, block: DIV.() -> Unit) = StringWriter().appendHTM
     }
     body {
         val time = measureNanoTime {
-            navbar(menu)
+            navbar {
+                link("Home", "/")
+                link("About", "/about")
+                separator()
+                dropDown("Dropdown") {
+                    link("Test 1", "/test1")
+                    link("Test 2", "/test2")
+                    separator()
+                    link("Test 3", "/test3")
+                }
+            }
             div(classes = "$container_fluid") {
                 block()
             }
