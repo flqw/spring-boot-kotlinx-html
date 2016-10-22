@@ -35,12 +35,12 @@
         <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>
             <artifactId>kotlinx.html.jvm</artifactId>
-            <version>latest-1.1.0-dev-3966-55</version>
+            <version>latest-1.1.0-dev-4137-72</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.exposed</groupId>
             <artifactId>exposed</artifactId>
-            <version>0.7.1</version>
+            <version>0.7.2</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
@@ -50,13 +50,12 @@
 
     <repositories>
         <repository>
-            <id>kotlin-dev</id>
-            <url>https://dl.bintray.com/kotlin/kotlin-dev/</url>
+            <id>kotlin-exposed</id>
+            <url>https://dl.bintray.com/kotlin/exposed/</url>
         </repository>
         <repository>
-            <id>bintray</id>
-            <name>bintray</name>
-            <url>http://dl.bintray.com/</url>
+            <id>kotlin-dev</id>
+            <url>https://dl.bintray.com/kotlin/kotlin-dev/</url>
         </repository>
     </repositories>
 
